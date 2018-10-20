@@ -72,6 +72,6 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response('Not Found', 404);
     }
 }

@@ -9,8 +9,17 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="team">
-            <directory suffix="Test.php">./tests/team</directory>
+        <testsuite name="team/create">
+            <directory>tests/team/create</directory>
+        </testsuite>
+        <testsuite name="team/update/{id}">
+            <directory>tests/team/update/{id}</directory>
+        </testsuite>
+        <testsuite name="team/{season}">
+            <directory>tests/team/{season}</directory>
+        </testsuite>
+        <testsuite name="team/delete/{id}">
+            <directory>tests/team/delete/{id}</directory>
         </testsuite>
     </testsuites>
     <filter>

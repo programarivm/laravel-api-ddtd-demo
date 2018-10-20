@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Team\Update\Id;
+namespace Tests\Team\Delete\Id;
 
 use Tests\TestCase;
 

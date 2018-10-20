@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/team/{season}', 'TeamController@index');
 Route::post('/team/create', 'TeamController@store');

@@ -56,7 +56,12 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response('Not Found', 404);
+        $input = $request->all();
+        $team = Team::find($id);
+        $team->fill($input);
+        $team->save();
+
+        return new TeamResource($team);
     }
 
     /**

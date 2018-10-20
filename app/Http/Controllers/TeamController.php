@@ -56,7 +56,7 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response('Not Found', 404);
     }
 
     /**

@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/team/{season}', 'TeamController@index');
 Route::post('/team/create', 'TeamController@store');
 Route::put('/team/update/{id}', 'TeamController@update');
+Route::delete('/team/delete/{id}', 'TeamController@destroy');

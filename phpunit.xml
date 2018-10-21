@@ -9,6 +9,9 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
+        <testsuite name="auth">
+            <directory>tests/auth</directory>
+        </testsuite>
         <testsuite name="team/create">
             <directory>tests/team/create</directory>
         </testsuite>

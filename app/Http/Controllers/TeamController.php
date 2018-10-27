@@ -6,6 +6,7 @@ use App\Team;
 use App\Http\Resources\TeamResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TeamController extends Controller
 {
@@ -77,6 +78,12 @@ class TeamController extends Controller
             throw new BadRequestHttpException;
         }
 
-        Team::find($id)->delete();
+        $team = Team::find($id);
+
+        if (!$team) {
+            throw new NotFoundHttpException;
+        }
+
+        $team->delete();
     }
 }

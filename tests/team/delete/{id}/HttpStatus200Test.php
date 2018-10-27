@@ -20,8 +20,6 @@ class HttpStatus200Test extends TestCase
             'Content-Type' => 'application/json',
         ])->delete("/api/team/delete/$id");
 
-        // $response = $this->json('DELETE', "/api/team/delete/$id");
-
         $response->assertStatus(200);
     }
 

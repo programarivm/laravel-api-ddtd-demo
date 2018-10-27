@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Team;
 use App\Http\Resources\TeamResource;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TeamController extends Controller
 {
@@ -72,6 +73,10 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            throw new BadRequestHttpException;
+        }
+
         Team::find($id)->delete();
     }
 }

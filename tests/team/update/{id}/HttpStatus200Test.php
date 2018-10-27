@@ -3,9 +3,12 @@
 namespace Tests\Team\Update\Id;
 
 use Tests\TestCase;
+use Tests\TokenAuthentication;
 
 class HttpStatus200Test extends TestCase
 {
+    use TokenAuthentication;
+
     /**
      * @dataProvider data
      * @test
@@ -25,7 +28,10 @@ class HttpStatus200Test extends TestCase
             $team['season'] = $season;
         }
 
-        $response = $this->json('PUT', "/api/team/update/$id", $team);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->accessToken(),
+            'Content-Type' => 'application/json',
+        ])->json('PUT', "/api/team/update/$id", $team);
 
         $response->assertStatus(200);
     }

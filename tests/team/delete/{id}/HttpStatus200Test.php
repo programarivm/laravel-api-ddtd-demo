@@ -3,16 +3,24 @@
 namespace Tests\Team\Delete\Id;
 
 use Tests\TestCase;
+use Tests\TokenAuthentication;
 
 class HttpStatus200Test extends TestCase
 {
+    use TokenAuthentication;
+
     /**
      * @dataProvider data
      * @test
      */
     public function http_status_200($id)
     {
-        $response = $this->json('DELETE', "/api/team/delete/$id");
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->accessToken(),
+            'Content-Type' => 'application/json',
+        ])->delete("/api/team/delete/$id");
+
+        // $response = $this->json('DELETE', "/api/team/delete/$id");
 
         $response->assertStatus(200);
     }

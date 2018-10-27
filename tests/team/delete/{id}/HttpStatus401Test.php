@@ -1,28 +1,23 @@
 <?php
 
-namespace Tests\Team\Season;
+namespace Tests\Team\Delete\Id;
 
 use Tests\TestCase;
-use Tests\TokenAuthentication;
 
-class HttpStatus200Test extends TestCase
+class HttpStatus401Test extends TestCase
 {
-    use TokenAuthentication;
-
     /**
      * @dataProvider data
      * @test
      */
-    public function http_status_200($season)
+    public function http_status_200($id)
     {
-        $accessToken = $this->accessToken();
-
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$accessToken,
+            'Authorization' => 'Bearer foo',
             'Content-Type' => 'application/json',
-        ])->get("/api/team/$season");
+        ])->delete("/api/team/delete/$id");
 
-        $response->assertStatus(200);
+        $response->assertStatus(401);
     }
 
     public function data()
@@ -31,7 +26,7 @@ class HttpStatus200Test extends TestCase
         $queryStrings = json_decode(file_get_contents(__DIR__ . '/data/http_status_200.json'))->queryString;
         foreach ($queryStrings as $queryString) {
             $data[] = [
-                $queryString->season
+                $queryString->id
             ];
         }
 

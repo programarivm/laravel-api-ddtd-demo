@@ -3,26 +3,23 @@
 namespace Tests\Team\Season;
 
 use Tests\TestCase;
-use Tests\TokenAuthentication;
 
-class HttpStatus200Test extends TestCase
+class HttpStatus401Test extends TestCase
 {
-    use TokenAuthentication;
-
     /**
      * @dataProvider data
      * @test
      */
-    public function http_status_200($season)
+    public function http_status_401($season)
     {
-        $accessToken = $this->accessToken();
+        $accessToken = 'foo';
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$accessToken,
             'Content-Type' => 'application/json',
         ])->get("/api/team/$season");
 
-        $response->assertStatus(200);
+        $response->assertStatus(401);
     }
 
     public function data()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Team\Create;
+namespace Tests\Team\Season;
 
 use Tests\TestCase;
 use Tests\TokenAuthentication;

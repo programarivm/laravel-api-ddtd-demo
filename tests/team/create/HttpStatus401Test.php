@@ -12,8 +12,6 @@ class HttpStatus401Test extends TestCase
      */
     public function http_status_401($name, $location, $stadium, $season)
     {
-        $accessToken = 'foo';
-
         $team = [
             'name' => $name,
             'location' => $location,
@@ -22,9 +20,9 @@ class HttpStatus401Test extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$accessToken,
+            'Authorization' => 'Bearer foo',
             'Content-Type' => 'application/json',
-        ])->post('/api/team/create', $team);
+        ])->json('POST', '/api/team/create', $team);
 
         $response->assertStatus(401);
     }

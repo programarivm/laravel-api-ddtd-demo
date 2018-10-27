@@ -35,7 +35,7 @@ Copy and paste the following variables into your `.env` file:
 
 Please note, the value of `DB_HOST` is replaced from `127.0.0.1` to `172.26.0.2`, which is the IP of the MySQL container. The `IPAddress` is obtained this way:
 
-	docker inspect blog_mysql
+	docker inspect football_mysql
 
 Then run:
 

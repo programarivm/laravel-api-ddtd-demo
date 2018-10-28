@@ -58,8 +58,17 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            throw new BadRequestHttpException;
+        }
+
         $input = $request->all();
         $team = Team::find($id);
+
+        if (!$team) {
+            throw new NotFoundHttpException;
+        }
+
         $team->fill($input);
         $team->save();
 

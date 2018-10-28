@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Team\Update\Id;
+namespace App\Tests\Team\Update\Id;
 
-use Tests\TokenAuthenticatedCase;
+use Tests\TestCase;
 
-class HttpStatus200Test extends TokenAuthenticatedCase
+class HttpStatus401Test extends TestCase
 {
     /**
      * @dataProvider data
      * @test
      */
-    public function http_status_200($id, $name = null, $location = null, $stadium = null, $season = null)
+    public function http_status_401($id, $name = null, $location = null, $stadium = null, $season = null)
     {
         if (isset($name)) {
             $team['name'] = $name;
@@ -26,11 +26,11 @@ class HttpStatus200Test extends TokenAuthenticatedCase
         }
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$this->accessToken,
+            'Authorization' => 'Bearer foo',
             'Content-Type' => 'application/json',
         ])->json('PUT', "/api/team/update/$id", $team);
 
-        $response->assertStatus(200);
+        $response->assertStatus(401);
     }
 
     public function data()

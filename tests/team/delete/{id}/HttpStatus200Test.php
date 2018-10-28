@@ -2,13 +2,10 @@
 
 namespace Tests\Team\Delete\Id;
 
-use Tests\TestCase;
-use Tests\TokenAuthentication;
+use Tests\TokenAuthenticatedCase;
 
-class HttpStatus200Test extends TestCase
+class HttpStatus200Test extends TokenAuthenticatedCase
 {
-    use TokenAuthentication;
-
     /**
      * @dataProvider data
      * @test
@@ -16,7 +13,7 @@ class HttpStatus200Test extends TestCase
     public function http_status_200($id)
     {
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$this->accessToken(),
+            'Authorization' => 'Bearer '.$this->accessToken,
             'Content-Type' => 'application/json',
         ])->delete("/api/team/delete/$id");
 

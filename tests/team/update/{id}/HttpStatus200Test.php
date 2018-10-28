@@ -2,13 +2,10 @@
 
 namespace Tests\Team\Update\Id;
 
-use Tests\TestCase;
-use Tests\TokenAuthentication;
+use Tests\TokenAuthenticatedCase;
 
-class HttpStatus200Test extends TestCase
+class HttpStatus200Test extends TokenAuthenticatedCase
 {
-    use TokenAuthentication;
-
     /**
      * @dataProvider data
      * @test
@@ -29,7 +26,7 @@ class HttpStatus200Test extends TestCase
         }
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$this->accessToken(),
+            'Authorization' => 'Bearer '.$this->accessToken,
             'Content-Type' => 'application/json',
         ])->json('PUT', "/api/team/update/$id", $team);
 

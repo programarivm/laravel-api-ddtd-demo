@@ -2,13 +2,10 @@
 
 namespace Tests\Team\Create;
 
-use Tests\TestCase;
-use Tests\TokenAuthentication;
+use Tests\TokenAuthenticatedCase;
 
-class HttpStatus201Test extends TestCase
+class HttpStatus201Test extends TokenAuthenticatedCase
 {
-    use TokenAuthentication;
-
     /**
      * @dataProvider data
      * @test
@@ -23,7 +20,7 @@ class HttpStatus201Test extends TestCase
         ];
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$this->accessToken(),
+            'Authorization' => 'Bearer '.$this->accessToken,
             'Content-Type' => 'application/json',
         ])->json('POST', '/api/team/create', $team);
 

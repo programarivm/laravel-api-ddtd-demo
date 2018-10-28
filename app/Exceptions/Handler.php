@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +49,22 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if ($exception instanceof BadRequestHttpException) {
+            $message = 'Bad Request';
+        } elseif ($exception instanceof NotFoundHttpException) {
+            $message = 'Not Found';
+        } elseif ($exception instanceof UnauthorizedHttpException) {
+            $message = 'Unauthorized';
+        } else {
+            $message = 'Internal Server Error';
+        }
+
+        return response(
+            json_encode([
+                'status' => $exception->getStatusCode(),
+                'message' => $message,
+            ]),
+            $exception->getStatusCode()
+        )->header('Content-Type', 'application/json');
     }
 }

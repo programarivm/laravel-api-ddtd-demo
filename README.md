@@ -52,14 +52,14 @@ Then run:
 
 | Method       | Description                                |
 |--------------|--------------------------------------------|
-| `PUT`        | Gets a new access token                    |
+| `POST`       | Gets a new access token                    |
 
 Example:
 
-    curl -X POST -i http://localhost:8080/auth --data '{
-        "username": "bob",
-        "password": "password"
-    }'
+	curl -X POST -H 'Content-Type: application/json' -i http://localhost:8080/api/auth --data '{
+	    "username": "bob",
+	    "password": "password"
+	}'
 
     {
         "status": 200,
@@ -74,12 +74,12 @@ Example:
 
 Example:
 
-    curl -X POST -i http://localhost:8080/team/create --data '{
-        "name": "Arsenal",
-        "location": "Holloway, London",
-        "stadium": "Emirates Stadium",
-        "season": "2017-18"
-    }'
+	curl -X POST -H 'Content-Type: application/json' -i http://localhost:8080/api/team/create --data '{
+	    "name": "Arsenal",
+	    "location": "Holloway, London",
+	    "stadium": "Emirates Stadium",
+	    "season": "2017-18"
+	}'
 
     {
       "status": 401,
@@ -88,17 +88,24 @@ Example:
 
 Example:
 
-    curl -X POST -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjg2NTIzfQ.Kz1WPilwEqbWevpGGDbVv3smAuzjhsjXtL7lbG4aQXk' -i http://localhost:8080/team/create --data '{
-        "name": "Arsenal",
-        "location": "Holloway, London",
-        "stadium": "Emirates Stadium",
-        "season": "2017-18"
-    }'
+	curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/create --data '{
+	    "name": "Arsenal",
+	    "location": "Holloway, London",
+	    "stadium": "Emirates Stadium",
+	    "season": "2017-18"
+	}'
 
-    {
-        "status": 200,
-        "message": "Team successfully created"
-    }
+	{
+	  "data": {
+	    "name": "Arsenal",
+	    "location": "Holloway, London",
+	    "stadium": "Emirates Stadium",
+	    "season": "2017-18",
+	    "updated_at": "2018-10-28 17:41:06",
+	    "created_at": "2018-10-28 17:41:06",
+	    "id": 42
+	  }
+	}
 
 ### `/team/{season}`
 
@@ -108,7 +115,7 @@ Example:
 
 Example:
 
-    curl -X GET -i http://localhost:8080/team/2017-18
+    curl -X GET -i http://localhost:8080/api/team/2017-18
 
     {
         "status": 401,
@@ -117,7 +124,7 @@ Example:
 
 Example:
 
-    curl -X GET -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjg2NTIzfQ.Kz1WPilwEqbWevpGGDbVv3smAuzjhsjXtL7lbG4aQXk' -i http://localhost:8080/team/2017-18
+	curl -X GET -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/2017-18
 
     {
         "status": 200,
@@ -252,20 +259,27 @@ Example:
 
 Example:
 
-    curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/update/12 --data '{
-        "location": "Manchester"
-    }'
+	curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/update/12 --data '{
+	        "location": "Manchester"
+	    }'
 
-    {
-      "status": 200,
-      "message": "Team successfully updated"
-    }
+	{
+	  "data": {
+	    "id": 12,
+	    "name": "Manchester United",
+	    "location": "Trafford, Greater Manchester",
+	    "stadium": "Old Trafford",
+	    "season": "2017-18",
+	    "created_at": "2018-10-28 16:35:34",
+	    "updated_at": "2018-10-28 16:35:34"
+	  }
+	}
 
 Example:
 
-    curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/update/foo --data '{
-        "location": "Manchester"
-    }'
+	curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/update/foo --data '{
+			"location": "Manchester"
+		}'
 
     {
       "status": 400,
@@ -274,9 +288,9 @@ Example:
 
 Example:
 
-    curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/update/7848765 --data '{
-        "location": "Manchester"
-    }'
+	curl -X PUT -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/update/7848765 --data '{
+	        "location": "Manchester"
+	    }'
 
     {
       "status": 404,
@@ -291,7 +305,7 @@ Example:
 
 Example:
 
-    curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/delete/1
+	curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/delete/1
 
     {
       "status": 200,
@@ -300,7 +314,7 @@ Example:
 
 Example:
 
-    curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/delete/foo
+	curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/delete/foo
 
     {
       "status": 400,
@@ -309,7 +323,7 @@ Example:
 
 Example:
 
-    curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTMyMjkzMDQxfQ.qqocS5aazMf8ebXigjmA0JKhEnlrJs4idGE-8MZjMUU' -i http://localhost:8080/team/delete/7848765
+	curl -X DELETE -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiZXhwIjoxNTQwNzUxOTExfQ.3iXVYLfBnUuAlpZJG5b9l_0XPo6dCum8jKNYEV6zbI0' -i http://localhost:8080/api/team/delete/7848765
 
     {
       "status": 404,

@@ -267,7 +267,7 @@ Example:
 	  "data": {
 	    "id": 12,
 	    "name": "Manchester United",
-	    "location": "Trafford, Greater Manchester",
+	    "location": "Manchester",
 	    "stadium": "Old Trafford",
 	    "season": "2017-18",
 	    "created_at": "2018-10-28 16:35:34",

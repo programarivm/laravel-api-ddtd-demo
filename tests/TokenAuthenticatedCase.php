@@ -2,8 +2,12 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 abstract class TokenAuthenticatedCase extends TestCase
 {
+    use WithoutMiddleware; // disables rate limiting
+
     protected $user = [
         'username' => 'bob',
         'password' => 'password',

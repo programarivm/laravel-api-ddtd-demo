@@ -10,8 +10,6 @@ For further information please visit:
 
 - [A Data-Driven Test Development (DDTD) Approach with PHPUnit](https://programarivm.com/data-driven-test-development-demo-ddtd-approach-with-phpunit/)
 
-- [Data Driven Test Development Demo](https://github.com/programarivm/data-driven-test-development-demo/blob/master/README.md)
-
 - [Dockerize a Laravel 5 App with PHP-FPM, NGINX and MySQL](https://programarivm.com/dockerize-a-laravel-5-app-with-php-fpm-nginx-and-mysql/)
 
 ### Start the Docker Services
